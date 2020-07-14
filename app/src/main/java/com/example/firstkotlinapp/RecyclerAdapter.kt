@@ -1,5 +1,8 @@
 package com.example.firstkotlinapp
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.item_view.view.*
 
 class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-      var users: List<Users> = ArrayList()
+    var users: List<Users> = ArrayList()
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -18,7 +21,7 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int = users.size
 
-    fun submitList(mUser: List<Users>){
+    fun submitList(mUser: List<Users>) {
         users = mUser
     }
 
@@ -39,13 +42,24 @@ class RecyclerAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         var musers: Users = users[position]
         when
-            (holder){
-            is ViewHolder ->{
+            (holder) {
+            is ViewHolder -> {
                 holder.bind(musers)
+                holder.itemView.setOnClickListener(View.OnClickListener {
+                    val intent = Intent(holder.itemView.context, Profile::class.java)
+                    intent.putExtra("gender",musers.gender)
+                    intent.putExtra("age",musers.age)
+                    intent.putExtra("name",musers.name)
+                    intent.putExtra("phoneNumber",musers.PhoneNumber)
+                    holder.itemView.context.startActivity(intent)
+                })
             }
         }
 
 
     }
 
+
 }
+
+

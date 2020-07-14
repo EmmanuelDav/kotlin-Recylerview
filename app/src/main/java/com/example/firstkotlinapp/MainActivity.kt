@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         Recyclerview.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
             actionAdapter = RecyclerAdapter()
-            adapter = actionAdapter
+           Recyclerview.adapter = actionAdapter
 
         }
         setData()
